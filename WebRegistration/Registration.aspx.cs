@@ -64,7 +64,7 @@ namespace WebRegistration //namespace is same as package in java
                 }
                 catch(SqlException ex)
                 {
-                    Console.Write(ex);
+                    Response.Write(ex);
                 }
 
             }
