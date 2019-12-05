@@ -12,7 +12,7 @@
             REGISTRATION PAGE</div>
         <p>
             Full Name:&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox4" runat="server" Width="349px"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" runat="server" Width="349px"></asp:TextBox>
         </p>
         <p>
             Username:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -26,7 +26,7 @@
         </p>
         <p>
             Confirm Password:&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox5" runat="server" TextMode="Password" Width="219px"></asp:TextBox>
+            <asp:TextBox ID="TextBox4" runat="server" TextMode="Password" Width="219px"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox5" ErrorMessage="Re-enter password" ForeColor="Red"></asp:RequiredFieldValidator>
         </p>
         <p>
@@ -41,23 +41,23 @@
         </p>
         <p>
             Age:&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox6" runat="server" Width="33px"></asp:TextBox>
+            <asp:TextBox ID="TextBox5" runat="server" Width="33px"></asp:TextBox>
         </p>
         <p>
             Street Number:&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
         </p>
         <p>
             Street Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
         </p>
         <p>
             City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
         </p>
         <p>
             PostalCode:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
         </p>
         <p>
             &nbsp;</p>

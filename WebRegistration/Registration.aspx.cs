@@ -20,7 +20,7 @@ namespace WebRegistration //namespace is same as package in java
             
                 if (this.Page.IsValid)
                 {
-                ExecuteInsert(this.TextBox4.Text, this.TextBox2.Text, this.TextBox3.Text);
+                ExecuteInsert(this.TextBox1.Text, this.TextBox2.Text, this.TextBox3.Text);
                 this.Label1.Text = "Thank you for your submission";
             }
                 
