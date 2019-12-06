@@ -62,7 +62,7 @@
         </p>
         <p>
             PostalCode:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TxtPostalCode" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtPostalCode" runat="server"></asp:TextBox>
         </p>
         <p>
             &nbsp;</p>

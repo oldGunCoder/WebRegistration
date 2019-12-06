@@ -19,7 +19,21 @@ namespace WebRegistration //namespace is same as package in java
             
                 if (this.Page.IsValid)
                 {
-                    int result = ExecuteInsert(this.txtName.Text, this.txtUsername.Text, this.txtPassword.Text, this.ddlGender.SelectedValue, Convert.ToInt32(this.txtAge.Text), Convert.ToInt32(this.txtStreetNumber.Text), this.txtStreetName.Text, this.txtCity.Text, this.TxtPostalCode.Text);
+                BussinessLayer.Address address = new BussinessLayer.Address();
+                address.StreetNumber = Convert.ToInt32(this.txtStreetNumber.Text);
+                address.StreetName = this.txtStreetName.Text;
+                address.City = this.txtCity.Text;
+                address.PostalCode = this.txtPostalCode.Text;
+
+                BussinessLayer.Registration registration = new BussinessLayer.Registration();
+                registration.Name = this.txtName.Text;
+                registration.Username = this.txtUsername.Text;
+                registration.Password = this.txtPassword.Text;
+                registration.Gender = this.ddlGender.Text;
+                registration.Age = Convert.ToInt32(this.txtAge.Text);
+
+
+                int result = BussinessLayer.UtilityTools.ExecuteInsert(address, registration);
 
                 if (result == 1)
                     this.lblResultMessage.Text = "Successful submition!";

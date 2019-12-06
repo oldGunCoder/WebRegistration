@@ -139,13 +139,13 @@ namespace WebRegistration {
         protected global::System.Web.UI.WebControls.TextBox txtCity;
         
         /// <summary>
-        /// TxtPostalCode control.
+        /// txtPostalCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPostalCode;
+        protected global::System.Web.UI.WebControls.TextBox txtPostalCode;
         
         /// <summary>
         /// btnSubmit control.
