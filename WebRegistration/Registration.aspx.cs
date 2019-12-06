@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 
 namespace WebRegistration //namespace is same as package in java
@@ -12,17 +7,29 @@ namespace WebRegistration //namespace is same as package in java
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Label1.Text = "";
+            if (this.Page.IsPostBack)
+            {
+                this.lblResultMessage.Text = "";
+            }
+
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnSubmit_Click(object sender, EventArgs e)
         {
             
                 if (this.Page.IsValid)
                 {
-                ExecuteInsert(this.TextBox1.Text, this.TextBox2.Text, this.TextBox3.Text);
-                this.Label1.Text = "Thank you for your submission";
-            }
+                    int result = ExecuteInsert(this.txtName.Text, this.txtUsername.Text, this.txtPassword.Text, this.ddlGender.SelectedValue, Convert.ToInt32(this.txtAge.Text), Convert.ToInt32(this.txtStreetNumber.Text), this.txtStreetName.Text, this.txtCity.Text, this.TxtPostalCode.Text);
+
+                if (result == 1)
+                    this.lblResultMessage.Text = "Successful submition!";
+                else if (result == 0)
+                    this.lblResultMessage.Text = "There was an error at the Database level";
+                else
+                    this.lblResultMessage.Text = "There was an error at the Method level";
+                
+
+                }
                 
             
         }
@@ -32,41 +39,56 @@ namespace WebRegistration //namespace is same as package in java
             return System.Configuration.ConfigurationManager.ConnectionStrings["RegistrationDB"].ConnectionString;
         }
 
-        private void ExecuteInsert(string name, string username, string password)
+        private int ExecuteInsert(string name, string username, string password, string gender, int age, int streetNumber, string streetName, string city, string postalCode)
         {
             SqlConnection conn;
+            SqlCommand cmd;
 
             using (conn = new SqlConnection(GetConnectionString()))
             {
                 try
-                { 
-                    string sql = "INSERT INTO Registration (Name, Username, Password) VALUES (@Name,@Username,@Password)";
+                {
+                    //string sql = "INSERT INTO Registration (Name, Username, Password) VALUES (@Name,@Username,@Password)";
+                    string sql = "sp_InsertRegistrationInfo";
 
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    SqlParameter[] param = new SqlParameter[3];
-                    param[0] = new SqlParameter("@Name", System.Data.SqlDbType.VarChar, 50);
-                    param[1] = new SqlParameter("@Username", System.Data.SqlDbType.VarChar, 50);
-                    param[2] = new SqlParameter("@Password", System.Data.SqlDbType.VarChar, 50);
-
-                    param[0].Value = name;
-                    param[1].Value = username;
-                    param[2].Value = password;
-
-                    foreach (SqlParameter p in param)
+                    using (cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.Add(p);
+
+                        SqlParameter[] param = new SqlParameter[9];
+                        param[0] = new SqlParameter("@Name", System.Data.SqlDbType.VarChar, 50);
+                        param[1] = new SqlParameter("@Username", System.Data.SqlDbType.VarChar, 50);
+                        param[2] = new SqlParameter("@Password", System.Data.SqlDbType.VarChar, 50);
+                        param[3] = new SqlParameter("@Gender", System.Data.SqlDbType.Char, 6);
+                        param[4] = new SqlParameter("@Age", System.Data.SqlDbType.Int, 50);
+                        param[5] = new SqlParameter("@StreetNumber", System.Data.SqlDbType.Int, 50);
+                        param[6] = new SqlParameter("@StreetName", System.Data.SqlDbType.VarChar, 50);
+                        param[7] = new SqlParameter("@City", System.Data.SqlDbType.VarChar, 50);
+                        param[8] = new SqlParameter("@PostalCode", System.Data.SqlDbType.Char, 6);
+
+                        param[0].Value = name;
+                        param[1].Value = username;
+                        param[2].Value = password;
+                        param[3].Value = gender;
+                        param[4].Value = age;
+                        param[5].Value = streetNumber;
+                        param[6].Value = streetName;
+                        param[7].Value = city;
+                        param[8].Value = postalCode;
+
+                        foreach (SqlParameter p in param)
+                        {
+                            cmd.Parameters.Add(p);
+                        }
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        return (int)cmd.ExecuteScalar();
                     }
-
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.ExecuteNonQuery();
                 }
-                catch(SqlException ex)
+                catch (SqlException ex)
                 {
-                    Response.Write(ex);
+                    return ex.ErrorCode;
                 }
-
             }
         }
     }
