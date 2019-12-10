@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace WebRegistration.BussinessLayer
 {
@@ -65,5 +66,37 @@ namespace WebRegistration.BussinessLayer
                 }
             }
         }
+    
+
+        public static DataSet ExecuteSelect()
+         {
+            SqlConnection conn;
+            SqlCommand cmd;
+
+            using (conn = new SqlConnection(GetConnectionString()))
+            {
+                try
+                {
+                    string sql = "sp_SelectRegistrationInfo";
+
+                    conn.Open();
+
+                    using (cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        return ds;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+            }
+         }
     }
 }
